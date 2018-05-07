@@ -46,22 +46,28 @@ let admin = new Schema ({
     }
 },
     {
-        timestamp:{
+        timestamps:{
             createdAt: 'created_at',
             updatedAt: 'updated_at',
     }});
 
 /* Mongoose pre hook middleware*/
-admin.pre('save', (next)=> {
-    let Crypt = new helperLib.crypt.crypt();
-    if(this.first_name) this.first_name =  this.first_name.charAt(0).toUpperCase()+
-        this.first_name.slice(1)
-    if(this.last_name) this.last_name = this.last_name.charAt(0).toUpperCase()+
-        this.last_name.slice(1)
+admin.pre('save', function(next){
 
-    /*password use md5 */
+    let Crypt = new helperLib.crypt.crypt();
+
+
+    //@capital first letter of firstname and last name
+    if (this.first_name) this.first_name = this.first_name.charAt(0).toUpperCase()+this.first_name.slice(1)
+
+    if (this.last_name) this.last_name = this.last_name.charAt(0).toUpperCase()+this.last_name.slice(1)
+
+    //@hash password using MD5
     this.password = Crypt.hash(this.password);
-   next();
+
+    next();
+
+
 });
 
  /*@ get full name used */
