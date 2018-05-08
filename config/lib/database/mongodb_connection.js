@@ -15,12 +15,12 @@ module.exports = function(server, ENV) {
 
 	/*if if connection established*/
 	mongoose.connection.on('connected', (err, status) => {
-		console.log(chalk`{green Successfully connected to mongoDB {green.bold ${ENV.MONGODB}}}`) ;
+		console.log(chalk`{bgGreen Successfully connected to mongoDB {green.bold ${ENV.MONGODB}}}`) ;
 	});
 
 	/*if unable to connect to DB*/
 	mongoose.connection.on('error', (err) => {
-	    console.log(chalk`{red Failed to connect to mongoDB: {red.bold ${ENV.MONGODB}, ${err}}}`) ;
+	    console.log(chalk`{bgRed Failed to connect to mongoDB: {red.bold ${ENV.MONGODB}, ${err}}}`) ;
 	});	
 
 	/*if connection has been break due to any reason*/

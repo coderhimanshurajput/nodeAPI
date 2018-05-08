@@ -13,7 +13,7 @@ const express		= require('express'),
 function startServer(){
 
 server.listen(ENV.PORT,  ()=> {
-	console.log(chalk`{green Node Js server running on {green.bold ${ENV.PORT}} port at {green.bold ${ENV.MODE_TYPE}}..}`)
+	console.log(chalk`{bgYellow Node Js server running on {green.bold ${ENV.PORT}} port at {green.bold ${ENV.MODE_TYPE}}..}`)
 	});	
 }
 

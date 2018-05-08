@@ -37,10 +37,10 @@ let users = new Schema ({
     },
     reg_type:{
         type:String,
-        default:'mobile',
+        default:'mobile_app',
         trim: true
     },
-    Mobile:{
+    mobile:{
         type:Number,
         trim:true
     },

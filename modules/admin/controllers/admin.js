@@ -61,7 +61,7 @@ exports.adminLogin = (req, res) => {
             //@ delete password from user object for security
             user.password = undefined;
 
-            let Jwt = new helperLib.jwt();
+            let Jwt = new helperLib.jwt(user);
             let buf = new Buffer.from(JSON.stringify(user));
 
             resObj = Common.generateResponses(200, 'success', helperLib.messages.loggedInSuccess, null, user);

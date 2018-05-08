@@ -26,6 +26,7 @@ let fileObj = ReadDirectory.requireFiles(dir);
 router
 
     .post('/userRegistere',  Middleware.validatePassword,       fileObj['users'].userRegistere)
+    .post('/userLogin', fileObj['users'].userLogin)
 
 
 module.exports = {
