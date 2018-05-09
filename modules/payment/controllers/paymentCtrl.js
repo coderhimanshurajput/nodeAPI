@@ -2,12 +2,14 @@
 
 const
     path = require ('path'),
+    // crypto = require ('crypto'),
+    // random = require ('random-number'),
+    TAXID = require(path.resolve('./config/lib/const/constV')),
     PAYMENT = require('../models/paymentModel');
 
 exports.Payment = ((req, res, next)=> {
-    console.log('himanshu jjjjj')
-   let Pay = new PAYMENT (req.body);
-console.log(Pay);
+
+    let Pay = new PAYMENT (req.body);
 
    Pay.save((err, saveObj) => {
        if(err){
