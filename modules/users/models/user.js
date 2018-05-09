@@ -44,10 +44,6 @@ let users = new Schema ({
         type:Number,
         trim:true
     },
-    donation:{
-        type:Number,
-        trim: true
-    },
     verified:{
         type: Boolean,
         default:false,
