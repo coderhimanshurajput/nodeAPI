@@ -15,6 +15,7 @@ router
     .post('/addFundraisers', fileObj['fundraiserctrl'].addFundraisers)
 
 
+
 module.exports={
     router:router,
     base:'/api/admin'
