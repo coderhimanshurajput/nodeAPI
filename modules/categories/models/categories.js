@@ -9,7 +9,7 @@ const
 
 let categories = new Schema ({
    categories_name:{
-       type:String,
+       type: String,
        trim : true
    },
     categories_img:{

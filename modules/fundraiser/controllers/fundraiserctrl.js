@@ -8,7 +8,7 @@ const
 
    /* set storage file */
 let storage =  multer.diskStorage({
-    destination:'uploads/',
+    destination:'./uploads',
     filename: (req, file, cb)=> {
         cb(null, file.fieldname+'-'+Date.now() + path.extname(file.originalname));
     }
@@ -41,17 +41,32 @@ function checkFileType (file,cb) {
 exports.addFundraisers =  (req, res, next) =>{
     let ADDFUND = new AddFund (req.body);
 
-    ADDFUND.save ((err, saveObj) => {
-       if(err){
-           res.json({obj:err , message : 'Data is not saved'})
-       } else if(upload((req, res) => {
 
-       })) {
-           res.json({obj: saveObj, message : 'Data is saved'})
+    ADDFUND.save ((err, saveObj) => {
+       if(req.body.fundraiser_name ==''){
+           res.json({message:'sorry filed is not ok'});
        }
+        else if(err){
+           res.json({obj:err , message : 'Data is not saved'})
+       } else if(upload ,(req, res, (err)=>{
+           if(err){
+               res.json({message: err})
+           }else if(req.file == undefined){
+               res.json({obj:err,message:'Sorry File Note selected'})
+           }else {
+               res.json({obj: saveObj, message : 'Data is saved'})
+           }
+       }));
     });
 
 }
+
+/*exports.addFundraisers = (req, res, next)=>{
+    (upload.any(),(req, res,next)=>{
+        console.log(req.files);
+        res.send(req.files);
+    })
+}*/
 
  /*===========================================================================================*/
 
