@@ -38,16 +38,19 @@ const
         createdAt :'created_at',
         updatedAt : 'updated_at'
     }});
+
+    /* Crypto Randam number genrate   */
+    /* Payment.pre('save', (next)=> {
+         function  randomValueHex (len)
+         {
+             return crypto.randomBytes(Math.ceil(len/2)).toString('hex').slice(0,len);
+         }
+    let value = randomValueHex(16);
+    // console.log(value)
+         this.Oder_Id = value.this.Oder_Id;
+    // this.Oder_Id = value.this.Oder_Id;
+    next();
+    console.log(Oder_Id);
+     })*/
+
 module.exports = mongoose.model('payment',Payment)
-
-// Payment.pre('save', (next)=> {
-
-//    function  randomValueHex (len)
-//     {
-//         return crypto.randomBytes(Math.ceil(len/2)).toString('hex').slice(0,len);
-//     }
-//     let value = randomValueHex(16);
-//     console.log(value)
-//     this.Txn_Id = value.this.Txn_Id;
-//     next();
-// })

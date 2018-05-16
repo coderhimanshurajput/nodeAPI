@@ -2,13 +2,42 @@
 const
     path = require('path'),
     fs   = require('fs'),
-    upload = require (path.resolve('./config/lib/multer/multer')),
+    multer = require ('multer'),
     ADDcat = require('../models/categories');
-   
-   
-    exports.addCategories =(req, res)=>{
+
+/*======================================================================================================*/
+       /* File Upload with multer  */
+
+    const storage = multer.diskStorage({
+        destination : function (req, file,cb) {
+            cb(null,'./uploads');
+        },filename: function (req, file, cb) {
+            cb(null, new Date().toISOString() + file.originalname);
+        }
+    });
+
+    const fileFilter = (req, file, cb) => {
+        if(file.mimetype === 'image/jpeg'|| file.mimetype === 'image/png'){
+            cb(null, true)
+        } else {
+            cb(null, false);
+        }
+    };
+
+    const upload = multer({
+        storage:storage,
+        limits:{fileSize:1024 * 1024 * 5},
+        fileFilter: fileFilter
+    });
+
+/*=======================================================================================================================*/
+    /* Add categories method create */
+
+    exports.addCategories =(upload.single(),(req, res)=>{
             let obj=req.body;
-            // obj.categories_img = upload (res, err, file); 
+            // obj.categories_img = upload (res, err, file);
+         obj.categories_img = req.file ;
+
 
             if(obj.categories_name == "") {
                 res.status(404).json({message:"!! Sorry Your Cartegories is Empty, Please Enter Your Categories"})
@@ -33,6 +62,4 @@ const
                  }
                 })
             }
-    }
-
-  
+    })

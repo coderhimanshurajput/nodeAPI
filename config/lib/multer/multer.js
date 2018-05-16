@@ -3,11 +3,12 @@
 const
  path = require('path'),
  fs = require ('fs'),
- mutler = require ('multer');
+ multer = require ('multer');
 
  
  /* set storage file  */
-  let storage = mutler.diskStorage({
+
+  let storage = multer.diskStorage({
     destination:'../upload',
     filename: (req, file, cb) =>{
         cb(null , file.fieldname+'-'+Date.now() + path.extname(file.originalname));
@@ -15,7 +16,7 @@ const
   });
 
   /* Upload File  */
-  let upload = mutler({
+  let upload = multer({
     storage:storage,
     limits: {fileSize:100000},
     fileFilter: (req, file, cb)=> {

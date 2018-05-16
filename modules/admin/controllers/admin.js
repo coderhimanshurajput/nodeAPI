@@ -110,3 +110,19 @@ exports.adminRegistere = ((req, res, next) => {
             res.status(resObj.statusCode).json(resObj);
         })
 });
+
+exports.forgetpassword = ((req, res, next) => {
+    let forget = new admin(req.body);
+     console.log(forget);
+    forget.findOne({email:req.body.email}),(error, result) => {
+        if(error){
+            res.status(404).json({err,message:'Sorry'});
+        }else {
+            if(result){
+                console.log(result);
+            }
+
+        }
+        }
+    
+});
