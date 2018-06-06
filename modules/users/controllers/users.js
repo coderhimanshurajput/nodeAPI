@@ -11,9 +11,9 @@ const
 // user Register method
 
 exports.userRegistere = ((req, res, next) => {
-    let usersReg = new users(req.body);
 
-    console.log(usersReg);
+    let obj=req.body;
+    let usersReg = new users(req.body);
 
     usersReg.save((err,saved)=> {
         let resObj = {};
@@ -75,3 +75,45 @@ exports.userLogin = ((req, res, next) => {
 
 
 });
+
+exports.getusers = ((req, res)=> {
+        users.find({},{first_name:1,last_name:1,email:1,reg_type:1,mobile:1,verified:1},(error,result)=>{
+            if(error){
+                res.json({error});
+            }
+            else{
+                if(result){
+                    res.json({result});
+
+                }
+                else{
+                    res.json({message:"Success"});
+                }
+            }
+        })
+});
+
+exports.DeleteUser = ((req, res) => {
+
+
+    users.update({_id:req.body.id},{
+        $set:{
+            trash:true
+        }
+    },(error, result)=>{
+
+
+        if(error){
+            res.json({success:false, message:error});
+        }
+        else{
+            if(result){
+                res.json({success:true, message:"user successfully deleted"})
+            }
+            else{
+                res.json({success:false, message:"some error occurred"});
+            }
+        }
+    })
+
+})

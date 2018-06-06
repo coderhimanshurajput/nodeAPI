@@ -24,9 +24,10 @@ let fileObj = ReadDirectory.requireFiles(dir);
                 // routing
 
 router
-    .post('/adminLogin',                 fileObj['admin'].adminLogin)
+    .post('/ADMINlogin',                 fileObj['admin'].ADMINlogin)
     .post('/adminRegistere',  Middleware.validatePassword,       fileObj['admin'].adminRegistere)
     .post('/forgetpassword', fileObj['admin'].forgetpassword)
+
 
 
 module.exports = {

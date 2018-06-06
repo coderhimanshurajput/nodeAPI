@@ -27,7 +27,8 @@ router
 
     .post('/userRegistere',  Middleware.validatePassword,       fileObj['users'].userRegistere)
     .post('/userLogin', fileObj['users'].userLogin)
-
+    .get('/getusers', fileObj ['users'].getusers)
+    .delete('/DeleteUser', fileObj ['users'].DeleteUser)
 
 module.exports = {
     router: router,

@@ -3,20 +3,27 @@
 const
     path = require ('path'),
     crypto = require ('crypto'),
-    
-    // TAXID = require(path.resolve('./config/lib/const/constV')),
+    biguint = require('biguint-format'),
     PAYMENT = require('../models/paymentModel');
 
 exports.Payment = ((req, res, next)=> {
      let obj=req.body;
-    
-    // obj.Txn_Id=Math.floor(100000+Math.random()*9999999);
-    
+
+    /*function random (qty) {
+        return crypto.randomBytes(qty);
+    }
+    console.log(biguint.format(random(8), 'hex', { prefix: '0x' }));*/
+
+
+    /* ====================================================================================== */
 
     /*       crypto randam number function*/
+
     function  randomValueHex (len)
     {
-        return crypto.randomBytes(Math.ceil(len/2)).toString('hex').slice(0,len);
+        var code;
+        return code="CUM01"+ crypto.randomBytes(Math.ceil(len/2)).toString('hex').slice(0,len);
+        // console.log(code);
     }
     obj.Oder_Id = randomValueHex(16);
       

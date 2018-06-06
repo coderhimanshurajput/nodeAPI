@@ -2,6 +2,8 @@ module.exports = {
 	COMMON: 				require('./common'),
 	PORT: 					3006,
 	MONGODB: 				'NGEHELP',
+	USER:                   'himanshurajput56@gmail.com',
+	PASSWORD:				'RAMji@8798',
 	MONGO_DEBUG: 			 true,
 	MODE_TYPE: 				'Development_Mode',
 	HOST: 					'localhost',

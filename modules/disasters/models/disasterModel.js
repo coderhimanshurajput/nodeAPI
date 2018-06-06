@@ -69,7 +69,11 @@ let disasters = new Schema({
     document_3:{
         type : String,
         trim: true
-    }
+    },
+    status:{
+      type:Boolean,
+        default:true
+    },
 }, { timestamps:{
     createdAt: 'created_at',
         updatedAt: 'updated_at'

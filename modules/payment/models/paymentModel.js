@@ -40,7 +40,8 @@ const
     }});
 
     /* Crypto Randam number genrate   */
-    /* Payment.pre('save', (next)=> {
+
+/* Payment.pre('save', (next)=> {
          function  randomValueHex (len)
          {
              return crypto.randomBytes(Math.ceil(len/2)).toString('hex').slice(0,len);

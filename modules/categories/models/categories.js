@@ -12,13 +12,14 @@ let categories = new Schema ({
        type: String,
        trim : true
    },
-    categories_img:{
-       type: String,
-        trim: true
+    categories_img: String,
+    categories_status:{
+        type: Boolean,
+        default:false,
+
     },
     categories_description:{
        type:String,
-        trim: true
     }
 },{timestamps:{
     createdAt:'created_at',

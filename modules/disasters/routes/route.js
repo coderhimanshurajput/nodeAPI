@@ -13,6 +13,7 @@ let fileObj =  ReadDir.requireFiles(dir);
 
 router
  .post('/addDisasters', fileObj['disastersctrl'].addDisasters)
+    .get('/getDisasters',fileObj['disastersctrl'].getDisasters)
 
 
 module.exports={

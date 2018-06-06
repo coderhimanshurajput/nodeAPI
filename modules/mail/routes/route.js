@@ -1,18 +1,17 @@
-'use strict'
+'use strict';
 
 const
-    path = require('path'),
+    path = require ('path'),
     router = require('express').Router(),
     dir = `${path.dirname(__dirname)}/controllers`,
-    helperLib = require(path.resolve('./config/lib/helper_lib'));
-
+    helperLib = require (path.resolve('./config/lib/helper_lib'));
+	
 let ReadDirectory =  new helperLib.read_directory.readDirectory();
 
 let fileObj = ReadDirectory.requireFiles(dir);
 
 router
-    .post ('/addCategories', fileObj['categoriesctrl'].addCategories)
-    .get ('/getCategory', fileObj['categoriesctrl'].getCategory)
+    .post ('/Nmailer', fileObj['mailCtrl'].Nmailer)
 
 module.exports={
     router: router,

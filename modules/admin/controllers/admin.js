@@ -1,12 +1,18 @@
 'use strict';
 
+// import {JWT_KEY} from "../../../config/env/development";
+
 const
     path = require ('path'),
     fs = require ('fs'),
-    async = require ('async'),
-    _ = require ('lodash'),
+    // ran = require ('random-number'),
+    // async = require ('async'),
+    // _ = require ('lodash'),
     md5 = require ('md5'),
     helperLib = require(path.resolve('./config/lib/helper_lib')),
+    jwt = require('../../../config/lib/jwt/jwToken'),
+    JWT=require("jsonwebtoken"),
+    ENV = require(path.resolve(`./config/env/${process.env.NODE_ENV}`)),
     admin = require('../models/admin');
 
 
@@ -32,7 +38,7 @@ const
 
 });*/
 
-exports.adminLogin = (req, res) => {
+/*exports.adminLogin = (req, res) => {
 
     let conditions = {'email': req.body.email },
         requiredParams = ['email', 'password'],
@@ -83,7 +89,7 @@ exports.adminLogin = (req, res) => {
         res.status(resObj.statusCode).json(resObj);
     });
 
-}
+}*/
 
 
 exports.adminRegistere = ((req, res, next) => {
@@ -112,17 +118,78 @@ exports.adminRegistere = ((req, res, next) => {
 });
 
 exports.forgetpassword = ((req, res, next) => {
-    let forget = new admin(req.body);
-     console.log(forget);
-    forget.findOne({email:req.body.email}),(error, result) => {
-        if(error){
-            res.status(404).json({err,message:'Sorry'});
-        }else {
-            if(result){
-                console.log(result);
-            }
 
+    let randam= ran.generator({min: 1000, max: 5000 , integer: true});
+
+
+     let otp = randam();
+
+     let us=otp
+    admin.findOneAndUpdate({
+
+        email:req.body.email
+
+
+    },{
+        $set:{
+            otp:us
         }
+    },{new:true},(err,result)=>{
+
+        if(err){
+            res.json({message:err});
         }
-    
+        else{
+            if(result){
+                res.json(result);
+            }
+            else{
+                res.json(err);
+            }
+        }
+    })
+});
+
+
+exports.ADMINlogin=((req,res) => {
+
+    let obj=req.body;
+
+    admin.findOne({email:obj.email},(error, user)=>{
+
+        if(error){
+            res.json({error})
+        }
+        else{
+            if(user){
+                // console.log("email thik hai");
+                let Crypt = new helperLib.crypt.crypt();
+                let password = Crypt.hash(obj.password);
+                console.log(password);
+                if(user.password===password){
+
+                    user={
+
+                        email:user.email,
+                        first_name:user.first_name,
+                        last_name:user.last_name,
+                        _id:user._id
+                    }
+
+                     let supersecret="jksdhfkshdfkjshdfkjhsdjkfhsjkdfhsjkdfhjksdahfkjshd";
+                    let Token=JWT.sign(user,supersecret,{expiresIn:"1h"})
+
+                    user.token=Token;
+                    res.json({success:true, message:"you have been successfully logged in ", user:user})
+                }
+                else{
+                    res.json({success:false, message:"check password"})
+                }
+
+            }
+            else{
+                res.json({success:false, message:"error occurred while login"});
+            }
+        }
+    })
 });

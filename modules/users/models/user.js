@@ -49,6 +49,10 @@ let users = new Schema ({
         default:false,
         trim:true
     },
+    trash:{
+        type:Boolean,
+        default:false
+    },
     password:{
         type: String,
         trim: [true , 'password is required']
@@ -76,8 +80,8 @@ users.pre('save', function(next){
 
 });
 
-users.virtual('full_name').get(()=> {
+/*users.virtual('full_name').get(()=> {
     return `${this.first_name} ${this.last_name}`
-});
+});*/
 
 module.exports = mongoose.model('user',users)

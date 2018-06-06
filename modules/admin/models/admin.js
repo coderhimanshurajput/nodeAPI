@@ -43,7 +43,9 @@ let admin = new Schema ({
     password:{
         type: String,
         require: [true, 'Password is require']
-    }
+    },
+    otp:String
+
 },
     {
         timestamps:{
