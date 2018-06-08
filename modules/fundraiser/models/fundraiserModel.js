@@ -84,6 +84,11 @@ let fundraisers = new Schema ({
     document_3:{
         type : String,
         trim: true
+    },
+    status:{
+        type:Boolean,
+        trim:true,
+        default: true
     }
 
 },{

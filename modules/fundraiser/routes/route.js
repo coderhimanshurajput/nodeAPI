@@ -13,7 +13,11 @@ let fileObj =  ReadDir.requireFiles(dir);
 
 router
     .post('/addFundraisers', fileObj['fundraiserctrl'].addFundraisers)
-
+    .get('/GetFundraisers', fileObj['fundraiserctrl'].GetFundraisers)
+    .put('/Chng_Status', fileObj['fundraiserctrl'].Chng_Status)
+    .post('/Update_Fundraiser', fileObj['fundraiserctrl'].Update_Fundraiser)
+    .post('/Delete_Fundraiser',fileObj['fundraiserctrl'].Delete_Fundraiser)
+    .post('/Find_fundraiser', fileObj['fundraiserctrl'].Find_fundraiser)
 
 
 module.exports={
