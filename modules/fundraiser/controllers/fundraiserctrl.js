@@ -94,12 +94,16 @@ exports.Chng_Status = ('_id',(req,res,next)=> {
 /* Fundraiser Update method  */
 exports.Update_Fundraiser = ((req, res)=>{
     let obj=req.body;
+    if(_.isEmpty(obj)){
+        res.status(400).json({success: false, message:'Sorry filed is empty'})
+    }else {
     AddFund.findOneAndUpdate(
         {
             _id:obj.id
         },{
             fundraiser_name:obj.fundraiser_name,
             short_description:obj.short_description,
+            fundraiser_description:obj.fundraiser_description,
             goal_amount:obj.goal_amount,
             start_date:obj.start_date,
             end_date:obj.end_date},{
@@ -117,7 +121,7 @@ exports.Update_Fundraiser = ((req, res)=>{
                 }
             }
         })
-});
+}});
 
 /* delete Fundraiser with id */
 
@@ -143,6 +147,7 @@ exports.Find_fundraiser = ((req,res) =>{
    let obj = req.body;
    console.log(obj);
    AddFund.findOne({_id:obj.id},{
+       fundraiser_name:1,
        short_description:1,
        start_date:1,
        end_date:1,
