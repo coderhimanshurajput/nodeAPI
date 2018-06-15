@@ -13,7 +13,9 @@ let fileObj = ReadDirectory.requireFiles(dir);
 router
     .post ('/addCategories', fileObj['categoriesctrl'].addCategories)
     .get ('/getCategory', fileObj['categoriesctrl'].getCategory)
-
+    .post('/CategoriesDetails',fileObj['categoriesctrl'].CategoriesDetails)
+    .post('/CategoriesDelete',fileObj['categoriesctrl'].CategoriesDelete)
+    .post('/UpdateCategories', fileObj['categoriesctrl'].UpdateCategories)
 module.exports={
     router: router,
     base: '/api/admin'

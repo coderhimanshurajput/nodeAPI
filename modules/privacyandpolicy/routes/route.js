@@ -12,7 +12,7 @@ let fileObj = ReadDir.requireFiles(dir);
 
 router
     .post ('/privacyandpolicy', fileObj['privacyctrl'].privacyandpolicy)
-
+    .post('/PrivacyUpdate', fileObj['privacyctrl'].PrivacyUpdate)
 
 
 module.exports = {

@@ -29,6 +29,7 @@ router
     .post('/userLogin', fileObj['users'].userLogin)
     .get('/getusers', fileObj ['users'].getusers)
     .delete('/DeleteUser', fileObj ['users'].DeleteUser)
+    .post('/UserDetails', fileObj['users'].UserDetails)
 
 module.exports = {
     router: router,

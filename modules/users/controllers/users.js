@@ -117,3 +117,32 @@ exports.DeleteUser = ((req, res) => {
     })
 
 })
+
+exports.UserDetails = ((req, res, next) =>{
+    users.findOne({_id:req.body.id},
+        {
+            foreign_key:1,
+            first_name:1,
+            last_name:1,
+            email:1,
+            mobile:1,
+            createdAt:1,
+            reg_type:1,
+            amount:1,
+            country:1,
+            city:1,
+            state:1,
+            verified:1
+
+        },(error,result)=>{
+        if(error){
+            res.status(400).json({success:false,error})
+        }else {
+            if(result){
+                res.status(200).json({success:true,result})
+            }else {
+                res.status(200).json({success:true, message:'Get data',result});
+            }
+        }
+    })
+})

@@ -31,7 +31,8 @@ const
     });
 
 /*=======================================================================================================================*/
-    /* Add categories method create */
+
+/* ======================= ---- Add categories method ---- ================================*/
 
     exports.addCategories =((req, res)=>{
             let obj=req.body;
@@ -64,8 +65,7 @@ const
             }
     })
 
-          /* ====== get category method create  ====== */
-
+/* ======================= ---- Get  categories method ---- ================================*/
   exports.getCategory = ((req, res) => {
       ADDcat.find({},{categories_name:1,categories_img:1,categories_description:1,categories_status:1 },(error,result) => {
           if(error){
@@ -80,7 +80,70 @@ const
       })
   })
 
+/* ======================= ---- UpdateStatus true or false method ---- =======================*/
 
 exports.updateStatus = ((req,res) => {
     ADDcat.findOneAndUpdate({},)
+})
+
+/* ======================= ---- Full Details categories method ---- ==========================*/
+
+exports.CategoriesDetails =((req, res, next)=>{
+    let obj = req.body;
+    ADDcat.findOne({_id:obj.id},
+        {
+
+            categories_name:1,
+            categories_img:1,
+            categories_description:1
+        },(error,result)=>{
+        if(error){
+            res.status(500).json({success:false,message:'Sorry Internal Server error !!!!'})
+        }else {
+            if(!result){
+                res.status(400).json({success:false,message:'result not found',result})
+            }else {
+                res.status(200).json({success: true, message:'result ',result})
+            }
+        }
+
+        })
+})
+
+/* ======================= ---- Delete categories method ---- ===============================*/
+exports.CategoriesDelete =((req, res)=>{
+    let obj = req.body;
+
+    ADDcat.deleteOne({_id:obj.id},(error,result)=>{
+        if(error){
+            res.status(500).json({error,message:'Internal server error'})
+        }else{
+            if(!result){
+                res.status(400).json({result,message:'Result Not Found '})
+            }else {
+                res.status(200).json({message:'Delete data',data:result})
+            }
+        }
+    })
+})
+
+/* ======================= ---- Update categories method ---- ===============================*/
+
+exports.UpdateCategories = ((req, res)=>{
+    let obj = req.body;
+    ADDcat.findOneAndUpdate({_id:obj.id},{
+        categories_name:obj.categories_name,
+        categories_img:obj.categories_img,
+        categories_description:obj.categories_description
+    },(error,result)=>{
+        if(error){
+            res.status(500).json({error,message:'Internal server error'})
+        }else {
+            if(!result){
+                res.status(400).json({message:'Sorry Result not found',result})
+            }else {
+                res.status(200).json({message:'Thsnk you update data', data:result})
+            }
+        }
+    })
 })

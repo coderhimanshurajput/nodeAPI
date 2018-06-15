@@ -8,6 +8,7 @@ const
 let privacy = new Schema({
     privacyandpolicy:{
         type: String,
+
         trim: true
     }
 }, {timestamp:{

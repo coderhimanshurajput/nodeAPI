@@ -18,6 +18,10 @@ let toLower = (v) => {
 
 
 let users = new Schema ({
+    foreign_key:{
+      type:String,
+      trim: true
+    },
     first_name:{
         type:String,
         trim:true
@@ -26,7 +30,6 @@ let users = new Schema ({
         type:String,
         trim:true
     },
-
     email:{
       type: String,
         unique:true,
@@ -46,12 +49,28 @@ let users = new Schema ({
     },
     verified:{
         type: Boolean,
-        default:false,
+        default:true,
         trim:true
     },
     trash:{
         type:Boolean,
         default:false
+    },
+    amount:{
+        type:Number,
+        trim: true
+    },
+    country:{
+        type:String,
+        trim:true
+    },
+    state:{
+        type:String,
+        trim: true
+    },
+    city:{
+        type:String,
+        trim:true
     },
     password:{
         type: String,

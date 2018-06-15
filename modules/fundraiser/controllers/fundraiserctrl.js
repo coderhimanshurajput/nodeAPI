@@ -76,19 +76,31 @@ exports.GetFundraisers = ((req, res) => {
 
         /*===== Get status change on click event  method=====*/
 
-exports.Chng_Status = ('_id',(req,res,next)=> {
-    AddFund.findOneUpdate({_id:req.body._id},{status: false},{new: true},(error, result)=>{
-        if(error){
-            res.status(400).json({error})
-        }else {
-            if(result){
-                res.status(200).json({result});
-            }else {
-                res.status(200).json({message:"Data used"});
-            }
+exports.Chng_Status = ((req,res,next)=> {
 
+    if(false){
+        AddFund.findOneAndUpdate({_id:req._id},{status:true},{new: false},(error,result)=> {
+            if(error){
+                res.status(400).json({error})
+            } else {
+                res.status(400).json({result})
+            }
+        })
+    } else {
+        if(true){
+            AddFund.findOneAndUpdate({_id: req.body._id},{status: false},{new: true},(error,result)=>{
+                if(error){
+                    res.status(400).json({error})
+                }else {
+                    if(result){
+                        res.status(200).json({result})
+                    }else {
+                        res.status(200).json({message:"data update"});
+                    }
+                }
+            })
         }
-    })
+    }
 });
 
 /* Fundraiser Update method  */
@@ -121,7 +133,9 @@ exports.Update_Fundraiser = ((req, res)=>{
                 }
             }
         })
-}});
+}
+}
+);
 
 /* delete Fundraiser with id */
 

@@ -152,44 +152,51 @@ exports.forgetpassword = ((req, res, next) => {
 
 
 exports.ADMINlogin=((req,res) => {
-
     let obj=req.body;
 
-    admin.findOne({email:obj.email},(error, user)=>{
+    if({email:obj.email} == null ){
+        res.status(400).json({success:false, message:'Sorry please enter your email and password'})
+    }else {
+        admin.findOne({email:obj.email},(error, user)=>{
 
-        if(error){
-            res.json({error})
-        }
-        else{
-            if(user){
-                // console.log("email thik hai");
-                let Crypt = new helperLib.crypt.crypt();
-                let password = Crypt.hash(obj.password);
-                console.log(password);
-                if(user.password===password){
-
-                    user={
-
-                        email:user.email,
-                        first_name:user.first_name,
-                        last_name:user.last_name,
-                        _id:user._id
-                    }
-
-                     let supersecret="jksdhfkshdfkjshdfkjhsdjkfhsjkdfhsjkdfhjksdahfkjshd";
-                    let Token=JWT.sign(user,supersecret,{expiresIn:"1h"})
-
-                    user.token=Token;
-                    res.json({success:true, message:"you have been successfully logged in ", user:user})
-                }
-                else{
-                    res.json({success:false, message:"check password"})
-                }
-
+            if(error){
+                res.json({error})
             }
             else{
-                res.json({success:false, message:"error occurred while login"});
+                if(user){
+                    // console.log("email thik hai");
+                    let Crypt = new helperLib.crypt.crypt();
+                    let password = Crypt.hash(obj.password);
+                    console.log(password);
+                    if(user.password===password){
+
+                        user={
+
+                            email:user.email,
+                            first_name:user.first_name,
+                            last_name:user.last_name,
+                            _id:user._id
+                        }
+
+                        let supersecret="jksdhfkshdfkjshdfkjhsdjkfhsjkdfhsjkdfhjksdahfkjshd";
+                        let Token=JWT.sign(user,supersecret,{expiresIn:"1h"})
+
+                        user.token=Token;
+                        res.json({success:true, message:"you have been successfully logged in ", user:user})
+                    }
+                    else{
+                        res.json({success:false, message:"check password"})
+                    }
+
+                }
+                else{
+                    res.json({success:false, message:"error occurred while login"});
+                }
             }
-        }
-    })
+        })
+
+    }
+
+
+
 });

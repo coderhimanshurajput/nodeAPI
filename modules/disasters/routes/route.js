@@ -14,7 +14,9 @@ let fileObj =  ReadDir.requireFiles(dir);
 router
  .post('/addDisasters', fileObj['disastersctrl'].addDisasters)
     .get('/getDisasters',fileObj['disastersctrl'].getDisasters)
-
+    .post('/findDisasters',fileObj['disastersctrl'].findDisasters)
+    .post('/updateDisasters',  fileObj['disastersctrl'].updateDisasters)
+    .post('/DeleteDisaster', fileObj['disastersctrl'].DeleteDisaster)
 
 module.exports={
     router:router,
